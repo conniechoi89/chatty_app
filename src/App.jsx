@@ -9,26 +9,28 @@ class App extends Component {
     this.socket = null;
     this.state = {
       currentUser: {name: "Bob"},
-      messages: [
-        {
-          username: "Bob",
-          content: "Has anyone seen my marbles?",
-        },
-        {
-          username: "Anonymous",
-          content: "No, I think you lost them. You lost your marbles Bob. You lost them for good."
-        }
-      ]
+      messages: []
     };
     this.onNewPost = this.onNewPost.bind(this);
   }
 
   componentDidMount() {
     this.socket = new WebSocket("ws://localhost:3001");
+    this.socket.addEventListener('message', (message) => {
+      // this.socket.JSON.parse(message.data);
+
+      this.setState({messages: this.state.messages.concat(JSON.parse(message.data))});
+
+      // this.socket.send(JSON.stringify(this.state.messages));
+    });
+    //this.socket.send('welcome');
   }
 
   onNewPost(content) {
-    this.setState({messages: this.state.messages.concat({ username: "Bob", content: content })});
+    // this.setState({messages: this.state.messages.concat({ username: "Bob", content: content })});
+
+    const newMsg = {username: "connie", content: content};
+    this.socket.send(JSON.stringify(newMsg));
   }
     // var tempMessages = this.state.messages;
     // var newMessage = {
