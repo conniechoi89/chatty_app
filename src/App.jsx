@@ -4,9 +4,12 @@ import MessageList from "./MessageList.jsx";
 import Navbar from "./Navbar.jsx";
 
 class App extends Component {
- constructor(props) {
+
+  constructor(props) {
     super(props);
-    this.socket = null;
+
+    this.socket = new WebSocket("ws://localhost:3001");
+
     this.state = {
       currentUser: {name: "Bob"},
       messages: []
@@ -14,23 +17,22 @@ class App extends Component {
     this.onNewPost = this.onNewPost.bind(this);
   }
 
-  componentDidMount() {
-    this.socket = new WebSocket("ws://localhost:3001");
-    this.socket.addEventListener('message', (message) => {
-      // this.socket.JSON.parse(message.data);
+  componentWillMount() {
 
-      this.setState({messages: this.state.messages.concat(JSON.parse(message.data))});
-
-      // this.socket.send(JSON.stringify(this.state.messages));
+    this.socket.addEventListener('message', message => {
+      const { messages } = this.state;
+      this.setState({messages: messages.concat(JSON.parse(message.data))});
     });
-    //this.socket.send('welcome');
+
   }
 
   onNewPost(content) {
-    // this.setState({messages: this.state.messages.concat({ username: "Bob", content: content })});
 
-    const newMsg = {username: "connie", content: content};
+    // this.setState({messages: this.state.messages.concat({ username: "Bob", content: content })});
+    // this.socket.send(JSON.stringify())
+    const newMsg = { username: "connie", content: content};
     this.socket.send(JSON.stringify(newMsg));
+    console.log(JSON.stringify(newMsg));
   }
     // var tempMessages = this.state.messages;
     // var newMessage = {

@@ -28,22 +28,28 @@ const wss = new SocketServer({ server });
 // });
 
 
-
-
-
+const uuidv4 = require('uuid/v4');
 
 wss.on('connection', function connection(socket) {
-// client.push(socket);
-  socket.on('message', function incoming(message) {
+
+  wss.broadcast = message => {
     wss.clients.forEach(function each(client) {
       if (client.readyState === socket.OPEN) {
-      client.send(message);
-    }
+        client.send(JSON.stringify(message));
+      }
     });
-  // console.log('received: %s', message);
-  });
-  //socket.send('welcome');
+  }
 
+  // client.push(socket);
+  socket.on('message', function incoming(message) {
+
+    const objMessage = JSON.parse(message);
+
+    objMessage['id'] = uuidv4();
+
+    wss.broadcast(objMessage);
+
+  });
 });
 
 
