@@ -30,7 +30,7 @@ class App extends Component {
 
     // this.setState({messages: this.state.messages.concat({ username: "Bob", content: content })});
     // this.socket.send(JSON.stringify())
-    const newMsg = { username: "connie", content: content};
+    const newMsg = { username: content.valueUser, content: content.value};
     this.socket.send(JSON.stringify(newMsg));
     console.log(JSON.stringify(newMsg));
   }
