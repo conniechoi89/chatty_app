@@ -40,16 +40,29 @@ wss.on('connection', function connection(socket) {
     });
   }
 
-  // client.push(socket);
+    wss.broadcast = notification => {
+      wss.clients.forEach(function each(client) {
+        if (client.readyState === socket.OPEN) {
+        client.send(JSON.stringify(notification));
+      }
+    });
+  }
+
   socket.on('message', function incoming(message) {
-
     const objMessage = JSON.parse(message);
-
     objMessage['id'] = uuidv4();
-
+    // objMessage['type'] = 'incomingNotification';
     wss.broadcast(objMessage);
+  });
+
+  socket.on('notification', function incoming(notification) {
+    const notiMessage = JSON.parse(notification);
+    notiMessage['type'] = "postMessage";
+    wws.broadcast(notiMessage);
 
   });
+
 });
+
 
 

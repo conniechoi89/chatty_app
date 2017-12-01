@@ -4,25 +4,26 @@ class ChatBar extends Component {
   constructor() {
     super();
     this.state = {
-      value: '',
-      valueUser:''
+      messageContent: '',
+      currentUser:''
     };
-    this.onContentUser = this.onContentUser.bind(this);
+    this.onUserNameChange = this.onUserNameChange.bind(this);
     this.onContent = this.onContent.bind(this);
     this.contentAreaKeyDown = this.contentAreaKeyDown.bind(this);
+    this.UserAreaKeyDown = this.UserAreaKeyDown.bind(this);
   }
 
-
-  onContentUser(event) {
+  //User changes his name
+  onUserNameChange(event) {
     this.setState({
-      valueUser: event.target.value
+      currentUser: event.target.value
     });
   }
 
 
   onContent(event) {
     this.setState({
-      value: event.target.value
+      messageContent: event.target.value
     });
 
   }
@@ -32,15 +33,35 @@ class ChatBar extends Component {
       this.props.onNewPost(this.state);
       this.state.value = '';
     }
+  }
 
+  //When we press enter Then username change event is fire;
+  UserAreaKeyDown(event) {
+    if (event.key === 'Enter') {
+      // this.setState({
+      //   currentUser: event.target.value
+      // });
+      //console.log(this.currentUser);
+
+      var newNameChangeNotification = {
+        username: this.state.currentUser
+      };
+
+      //this.props.newUserName(this.state.currentUser);
+      this.props.newUserName(newNameChangeNotification);
+
+
+    }
   }
 
   render() {
     return (
       <footer className="chatbar">
-        <input className="chatbar-username" onChange={this.onContentUser} onKeyDown={this.contentAreaKeyDown} placeholder={this.props.currentUserName.name} />
+        <input className="chatbar-username"
+        onChange={this.onUserNameChange} onKeyDown={this.UserAreaKeyDown} placeholder={this.props.currentUserName.name} />
+
         <input className="chatbar-message" onChange={this.onContent} placeholder="Type a message and hit ENTER"
-          onKeyDown={this.contentAreaKeyDown} value={this.state.value}/>
+          onKeyDown={this.contentAreaKeyDown} />
       </footer>
     );
   }

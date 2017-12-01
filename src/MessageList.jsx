@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import Messages from "./Messages.jsx";
+import Message from "./Message.jsx";
 
 class MessageList extends Component {
   render() {
 
     const messages = this.props.messages.map((message, index) => {
-      return <Messages
+      return <Message
+        type={message.type}
         key={index}
         user={ message.username }
         content={ message.content }
