@@ -32,7 +32,7 @@ class App extends Component {
   //Function pointer in App that is invoked when username changes name
   onUserNameChange(content) {
     const newName = content.username;
-    var content = this.state.currentUser.name + " has changed name to " + newName;
+    var content = this.state.currentUser.name + " changed their name to " + newName;
     const notiMessage = {
       type: 'postNotification',
       content: content,

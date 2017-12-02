@@ -31,6 +31,7 @@ class ChatBar extends Component {
     }
     this.state.messageContent = '';
   }
+
   //When we press enter Then username change event is fire;
   UserAreaKeyDown(event) {
     if (event.key === 'Enter') {

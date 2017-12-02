@@ -10,8 +10,8 @@ body {
 }
 
 .chatbar {
-  background: tomato;
-  border-top: 1px solid black;
+  background: lightpink;
+  border-top: 1px solid lightcoral;
   bottom: 0;
   display: flex;
   left: 0;
@@ -22,7 +22,7 @@ body {
 
 .chatbar-message,
 .chatbar-username {
-  border: 1px solid black;
+  border: 1px solid lightcoral;
   display: block;
   height: 40px;
   line-height: 40px;
@@ -39,7 +39,6 @@ body {
 }
 
 .message {
-  display: flex;
   padding: 5px;
 }
 
@@ -65,8 +64,8 @@ body {
 }
 
 .navbar {
-  background: tomato;
-  border-bottom: 1px solid black;
+  background: lightpink;
+  border-bottom: 1px solid lightcoral;
   height: 60px;
   left: 0;
   padding: 0 10px;
