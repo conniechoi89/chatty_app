@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 
 class ChatBar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       messageContent: '',
-      currentUser:''
+      currentUser: props.currentUserName.name
     };
     this.onUserNameChange = this.onUserNameChange.bind(this);
     this.onContent = this.onContent.bind(this);
@@ -19,49 +19,47 @@ class ChatBar extends Component {
       currentUser: event.target.value
     });
   }
-
-
   onContent(event) {
     this.setState({
       messageContent: event.target.value
     });
-
   }
-
   contentAreaKeyDown(event) {
     if (event.key === 'Enter') {
       this.props.onNewPost(this.state);
       this.state.value = '';
     }
   }
-
   //When we press enter Then username change event is fire;
   UserAreaKeyDown(event) {
     if (event.key === 'Enter') {
-      // this.setState({
-      //   currentUser: event.target.value
-      // });
-      //console.log(this.currentUser);
-
       var newNameChangeNotification = {
         username: this.state.currentUser
       };
-
-      //this.props.newUserName(this.state.currentUser);
       this.props.newUserName(newNameChangeNotification);
-
-
+      this.messageInput.focus();
     }
   }
 
   render() {
     return (
       <footer className="chatbar">
-        <input className="chatbar-username"
-        onChange={this.onUserNameChange} onKeyDown={this.UserAreaKeyDown} placeholder={this.props.currentUserName.name} />
+        <input
+        className="chatbar-username"
+        value={this.state.currentUser}
+        onChange={this.onUserNameChange}
+        onKeyDown={this.UserAreaKeyDown}
+        placeholder="User Name"
+        />
+        <input
+        className="chatbar-message"
+        value={this.state.messageContent}
+        onChange={this.onContent}
+        placeholder="Type a message and hit ENTER"
+        onKeyDown={this.contentAreaKeyDown}
+        ref={(input) => { this.messageInput = input; }}
+        />
 
-        <input className="chatbar-message" onChange={this.onContent} placeholder="Type a message and hit ENTER"
-          onKeyDown={this.contentAreaKeyDown} />
       </footer>
     );
   }
