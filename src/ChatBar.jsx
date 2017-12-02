@@ -13,7 +13,7 @@ class ChatBar extends Component {
     this.UserAreaKeyDown = this.UserAreaKeyDown.bind(this);
   }
 
-  //User changes his name
+  //Users change their names
   onUserNameChange(event) {
     this.setState({
       currentUser: event.target.value
@@ -29,6 +29,7 @@ class ChatBar extends Component {
       this.props.onNewPost(this.state);
       this.state.value = '';
     }
+    this.state.messageContent = '';
   }
   //When we press enter Then username change event is fire;
   UserAreaKeyDown(event) {

@@ -35,7 +35,6 @@ class App extends Component {
     var content = this.state.currentUser.name + " has changed name to " + newName;
     const notiMessage = {
       type: 'postNotification',
-      username: newName,
       content: content,
       oldUserName: this.state.currentUser.name
     };
