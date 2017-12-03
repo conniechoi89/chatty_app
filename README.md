@@ -4,23 +4,15 @@ This is a simple, single-page, and real time Chatty App built with *React* like 
 
 The major function and behaviour of this app are:
 - Contains a chat log displaying messages and notifications
-
 - Contains an input field to change your name and an input field to send a message
-
 - The client-side app communicates with a server via WebSockets for multi-user real-time updates
-
 - No persistent database is involved; the focus is on the client-side experience
-
 - Display the count of connected users
-
 - After users change their user names, focus will go message bar so that they can write their message right away
-
 - Message bar will be empty after users enter their messages
-
 - When a client sends a message:
   - the server determines what to do based on the message's type property
   - users get a generated unique id (a UUID)
-
 
 
 ## Getting Started
@@ -32,6 +24,10 @@ The major function and behaviour of this app are:
 
 ## Screenchots
 
+!["Screenshot of Chatty App"](https://github.com/conniechoi89/chatty_app/blob/master/docs/chattyApp.png?raw=true)
+!["Screenshot of two Chatty App; numbers of users"](https://github.com/conniechoi89/chatty_app/blob/master/docs/chattyApp1.png?raw=true)
+!["Screenshot of Anonymous's message](https://github.com/conniechoi89/chatty_app/blob/master/docs/chattyApp2.png?raw=true)
+!["Screenshot of changed user name ](https://github.com/conniechoi89/chatty_app/blob/master/docs/chattyApp3.png?raw=true)
 
 ### Dependencies
 
